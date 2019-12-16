@@ -8,7 +8,7 @@ var args = { name: "value" };
 router.get("/UnitTests", async (req, res) => {
     const client = await soap.createClientAsync(url);
     client.UnitTestResultsAll(args, function(err, result) {
-        if (result.UnitTestResultsAllResult) {
+        if (result && result.UnitTestResultsAllResult) {
             let testResult = result.UnitTestResultsAllResult.string.map(
                 item => {
                     return JSON.parse(item);
@@ -24,7 +24,7 @@ router.get("/UnitTests", async (req, res) => {
 router.get("/UnitTests/GetNonPassingTest", async (req, res) => {
     const client = await soap.createClientAsync(url);
     client.GetNonPassingTest(args, function(err, result) {
-        if (result.GetNonPassingTestResult) {
+        if (result && result.GetNonPassingTestResult) {
             let testResult = result.GetNonPassingTestResult.string.map(item => {
                 return JSON.parse(item);
             });
@@ -38,7 +38,7 @@ router.get("/UnitTests/GetNonPassingTest", async (req, res) => {
 router.get("/UnitTests/GetPassingTest", async (req, res) => {
     const client = await soap.createClientAsync(url);
     client.GetPassingTest(args, function(err, result) {
-        if (result.GetPassingTestResult) {
+        if (result && result.GetPassingTestResult) {
             let testResult = result.GetPassingTestResult.string.map(item => {
                 return JSON.parse(item);
             });
@@ -52,7 +52,7 @@ router.get("/UnitTests/GetPassingTest", async (req, res) => {
 router.get("/UnitTests/GetFailedTest", async (req, res) => {
     const client = await soap.createClientAsync(url);
     client.GetFailedTest(args, function(err, result) {
-        if (result.GetFailedTestResult) {
+        if (result && result.GetFailedTestResult) {
             let testResult = result.GetFailedTestResult.string.map(item => {
                 return JSON.parse(item);
             });
@@ -69,7 +69,7 @@ router.get("/UnitTests/GetInfo", async (req, res) => {
     client.GetInfo(
         { testName: req.query.testName, filterType: req.query.filterType },
         function(err, result) {
-            if (result.GetInfoResult) {
+            if (result && result.GetInfoResult) {
                 if (Array.isArray(result.GetInfoResult.string)) {
                     let testResult = result.GetInfoResult.string.map(item => {
                         return JSON.parse(item);
