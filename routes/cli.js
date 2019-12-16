@@ -155,8 +155,6 @@ router.get("/h", async (req, res) => {
             args: "UnitTests here true false true getFailedTest"
         },
         function(err, result) {
-            
-            // return res.send(result.CommandProcessorResult);
             if (result.CommandProcessorResult) {
                 let data = JSON.parse(result.CommandProcessorResult);
                 let testResult = data.map(item => {
